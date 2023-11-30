@@ -7,10 +7,11 @@ router.get('/', function(req, res, next){
     console.log(authorization);
     const sql='SELECT* FROM desarrolladora'
     con.query(sql, function(error, result){
+        con.end();
         if (error){
             res.json({
                 status:"error" ,
-                error
+                error:error.message
             })
         } else {
             res.json({
