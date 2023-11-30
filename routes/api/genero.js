@@ -7,9 +7,10 @@ router.get('/', function(req, res, next){
     console.log(authorization);
     const sql='SELECT* FROM genero'
     con.query(sql, function(error, result){
+        
         if (error){
             res.json({
-                status:"error" ,
+                status:"error",
                 error
             })
         } else {
