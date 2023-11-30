@@ -6,12 +6,12 @@ router.post('/', function(req, res, next) {
     const {usuario, correo, contraseña}=req.body;
     const sql="INSERT INTO usuarios(usuario, correo, contraseña)VALUES(?,?,?)";
     con.query(sql, [usuario, correo, contraseña], function(error, result) {
-    con.end();
+
 
         if (error){
             res.json({
                 status:"error" ,
-                error: error.message
+                error
             })
         } else {
             res.json({
@@ -25,11 +25,11 @@ router.post('/', function(req, res, next) {
     console.log(authorization);
     const sql='SELECT* FROM usuarios'
     con.query(sql, function(error, result){
-    con.end();    
+    
         if (error){
             res.json({
                 status:"error" ,
-                error: error.message
+                error
             })
         } else {
             res.json({
@@ -48,7 +48,7 @@ router.put('/:id', function(req, res, next) {
         if (error) {
             res.json({
                 status: "error",
-                error:error.message
+                error
             })
         } else {
             res.json({

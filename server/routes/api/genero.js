@@ -11,7 +11,7 @@ router.get('/', function(req, res, next){
         if (error){
             res.json({
                 status:"error" ,
-                error:error.message
+                error
             })
         } else {
             res.json({
