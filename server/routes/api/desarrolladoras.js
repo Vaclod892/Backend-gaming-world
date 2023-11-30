@@ -5,7 +5,7 @@ var con = require("./conexion");
 router.get('/', function(req, res, next){
     const {authorization}= req.headers;
     console.log(authorization);
-    const sql='SELECT* FROM desarrolladora'
+    const sql='SELECT* FROM desarrolladoras'
     con.query(sql, function(error, result){
         if (error){
             res.json({
