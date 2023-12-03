@@ -58,6 +58,24 @@ router.put('/:id', function(req, res, next) {
     })
 });
 
-
+router.get('/:id', function(req, res, next){
+    const {authorization}= req.headers;
+    console.log(authorization);
+    const sql='SELECT* FROM usuarios where id=' + req.params.id
+    con.query(sql, function(error, result){
+        
+        if (error){
+            res.json({
+                status:"error" ,
+                error
+            })
+        } else {
+            res.json({
+                status:"ok",
+                usuarios:result
+            });
+        }
+    })
+});
 
   module.exports = router;
