@@ -4,10 +4,10 @@ var con = require("./conexion");
 
 
 router.post('/', function(req, res, next) {
-    const {nombre, genero_id, desarrolladora_id, plataforma_id, precio}=req.body;
+    const juegos=req.body;
     const sql="INSERT INTO juegos(nombre, genero_id, desarrolladora_id, plataforma_id, precio)VALUES(?,?,?,?,?)";
-    con.query(sql, [nombre, genero_id, desarrolladora_id, plataforma_id, precio],function(error, result){
-    
+    con.query(sql, [juegos],function(error, result){
+        console.log(req.body);
         if (error){
             res.json({
                 status:"error" ,
@@ -60,6 +60,7 @@ router.put('/:juegos_id', function(req, res, next) {
     })
 });
 
+        /*filtro*/
  router.get('/:juegos_id', function(req, res, next){
      const {authorization}= req.headers;
      console.log(authorization);
