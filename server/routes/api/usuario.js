@@ -3,11 +3,9 @@ var router = express.Router();
 var con = require("./conexion");
 
 router.post('/', function(req, res, next) {
-    const {usuario, correo, contraseña}=req.body;
-    const sql="INSERT INTO usuarios(usuario, correo, contraseña)VALUES(?,?,?)";
-    con.query(sql, [usuario, correo, contraseña], function(error, result) {
-
-
+    const usuarios=req.body;
+    const sql="INSERT INTO usuarios(usuario,correo,contraseña)VALUES(?,?,?)";
+    con.query(sql, [usuarios.usuario, usuarios.correo, usuarios.contraseña], function(error, result) {
         if (error){
             res.json({
                 status:"error" ,
@@ -16,6 +14,7 @@ router.post('/', function(req, res, next) {
         } else {
             res.json({
                 status:"ok",
+
             });
         }
     })
@@ -42,9 +41,9 @@ router.post('/', function(req, res, next) {
 
 router.put('/:id', function(req, res, next) {
     const id = req.params.id;
-    const {usuario, correo, contraseña} = req.body;
+    const usuarios= req.body;
     const sql = "UPDATE usuarios SET usuario=?, correo=?, contraseña=? WHERE id=?";
-    con.query(sql, [usuario, correo, contraseña, id], function(error, result) {
+    con.query(sql, [usuarios, id], function(error, result) {
         if (error) {
             res.json({
                 status: "error",

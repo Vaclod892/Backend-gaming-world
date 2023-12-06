@@ -4,22 +4,23 @@ var con = require("./conexion");
 
 
 router.post('/', function(req, res, next) {
-    const juegos=req.body;
-    const sql="INSERT INTO juegos(nombre, genero_id, desarrolladora_id, plataforma_id, precio)VALUES(?,?,?,?,?)";
-    con.query(sql, [juegos],function(error, result){
-        console.log(req.body);
-        if (error){
+    const juegos = req.body;
+    const sql = "INSERT INTO juegos(nombre, genero_id, desarrolladora_id, plataforma_id, precio) VALUES(?,?,?,?,?)";
+    con.query(sql, [juegos.nombre, juegos.genero_id, juegos.desarrolladora_id, juegos.plataforma_id, juegos.precio], function(error, result) {
+        if (error) {
             res.json({
-                status:"error" ,
+                status: "error",
                 error
-            })
+            });
         } else {
             res.json({
-                status:"ok",
+                status: "ok",
             });
         }
-    })
-  });
+    });
+});
+
+
 
 
   router.get('/', function(req, res, next){
@@ -44,9 +45,9 @@ router.post('/', function(req, res, next) {
 
 router.put('/:juegos_id', function(req, res, next) {
     const juegos_id = req.params.juegos_id;
-    const {nombre, genero_id, desarrolladora_id, plataforma_id, precio} = req.body;
+    const juegos = req.body;
     const sql = "UPDATE juegos SET nombre=?, genero_id=?, desarrolladora_id=?, plataforma_id=?, precio=? WHERE juegos_id=?";
-    con.query(sql, [nombre, genero_id, desarrolladora_id, plataforma_id, precio, juegos_id], function(error, result) {
+    con.query(sql, [juegos, juegos_id], function(error, result) {
             if (error) {
             res.json({
                 status: "error",
